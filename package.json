@@ -1,0 +1,22 @@
+{
+  "name": "zeji-lunar",
+  "private": true,
+  "version": "0.1.0",
+  "description": "赛博黄历 · 择吉黄历 —— 基于古籍的传统黄历个人网站（Cloudflare 全栈）",
+  "workspaces": [
+    "shared",
+    "site",
+    "worker"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=site",
+    "build": "npm run build --workspace=site",
+    "test": "npm run test --workspace=shared",
+    "typecheck": "npm run typecheck --workspace=shared && npm run typecheck --workspace=site && npm run typecheck --workspace=worker",
+    "deploy:site": "npm run build --workspace=site && npx wrangler pages deploy site/dist",
+    "deploy:worker": "npm run deploy --workspace=worker"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,45 @@
+/**
+ * 设计令牌 · 古籍册页（复古简约）
+ * 米纸底、墨色、朱砂点缀，宋体正文 + 楷体注文；不使用任何霓虹/赛博元素。
+ */
+:root {
+  /* 色板 */
+  --paper: #f6f1e4; /* 米纸底 */
+  --paper-card: #efe7d3; /* 卡片纸 */
+  --paper-deep: #e7dcc0; /* 强调纸 */
+  --ink: #2f2a24; /* 墨 */
+  --ink-soft: #6b6154; /* 次级墨 */
+  --ink-faint: #8a8172; /* 弱化墨 */
+  --cinnabar: #a03a2e; /* 朱砂 */
+  --cinnabar-deep: #7c2d22; /* 深朱砂 */
+  --gold: #a8843c; /* 金色点缀（慎用） */
+  --line: rgba(47, 42, 36, 0.32); /* 细线 */
+
+  /* 五行五色（幸运色 swatch 用） */
+  --wx-green: #3f6c51; /* 木·青 */
+  --wx-red: #a03a2e; /* 火·赤 */
+  --wx-yellow: #b8933d; /* 土·黄 */
+  --wx-white: #e8e2d0; /* 金·白 */
+  --wx-black: #2f2a24; /* 水·黑 */
+
+  /* 字体 */
+  --font-song: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --font-kai: 'Kaiti SC', 'STKaiti', 'KaiTi', 'Kai', 'Noto Serif SC', serif;
+  --font-latin: Georgia, 'Times New Roman', serif;
+
+  /* 间距（8px 网格） */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+
+  /* 版式 */
+  --text-base: 15px;
+  --text-sm: 13px;
+  --text-lg: 18px;
+  --line-height-base: 1.8;
+  --letter-title: 0.12em;
+  --radius: 2px;
+}

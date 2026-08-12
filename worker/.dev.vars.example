@@ -1,0 +1,6 @@
+# 复制为 .dev.vars（gitignore 已排除）用于本地 wrangler dev
+AUTH_TOKEN=change-me
+RESEND_API_KEY=re_YOUR_RESEND_KEY
+TO_EMAIL=you@example.com
+SEND_DOMAIN=your-domain.com
+SITE_ORIGIN=http://localhost:5173

@@ -1,0 +1,19 @@
+name = "zeji-worker"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+# KV 命名空间：本地开发可用占位 id（32 位十六进制，miniflare 本地模拟可接受）。
+# 上线前必须替换为真实 id：npx wrangler kv namespace create ZJ_KV
+[[kv_namespaces]]
+binding = "ZJ_KV"
+id = "00000000000000000000000000000000"
+
+# 每天 23:17 UTC = 北京时间次日 07:17 发送黄历早报
+[triggers]
+crons = ["17 23 * * *"]
+
+# 环境变量（非敏感）：
+# [vars]
+# SITE_ORIGIN = "https://你的域名"   # CORS 允许来源
+# 敏感值（AUTH_TOKEN / RESEND_API_KEY / TO_EMAIL / SEND_DOMAIN）用：
+# npx wrangler secret put <名字>

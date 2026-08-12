@@ -1,0 +1,171 @@
+/* 全局样式 · 古籍册页 */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--text-base);
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* 米纸微纹理（纯 CSS，不引图片） */
+  background-image:
+    radial-gradient(circle at 18% 25%, rgba(168, 132, 60, 0.055) 0 1.5px, transparent 1.5px),
+    radial-gradient(circle at 72% 65%, rgba(160, 58, 46, 0.045) 0 1.5px, transparent 1.5px),
+    radial-gradient(circle at 45% 85%, rgba(47, 42, 36, 0.04) 0 1px, transparent 1px),
+    linear-gradient(180deg, rgba(246, 241, 228, 0) 0%, rgba(231, 220, 192, 0.4) 100%);
+  background-attachment: fixed;
+  font-family: var(--font-song);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--cinnabar-deep);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: var(--letter-title);
+  margin: 0;
+}
+
+/* 古籍版框卡片 */
+.card {
+  background: var(--paper-card);
+  border: 3px double var(--ink);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: 0 1px 3px rgba(47, 42, 36, 0.08);
+}
+
+.card + .card {
+  margin-top: var(--space-3);
+}
+
+/* 竖排文本（宜/忌等） */
+.vertical {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.18em;
+}
+
+/* 朱砂/墨 标签 */
+.tag-cinnabar {
+  color: var(--cinnabar);
+  border: 1px solid var(--cinnabar);
+}
+.tag-ink {
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.tag {
+  display: inline-block;
+  padding: 1px 10px;
+  font-family: var(--font-kai);
+  font-size: var(--text-sm);
+  letter-spacing: 0.15em;
+  border-radius: var(--radius);
+  margin: 0 6px 6px 0;
+}
+
+/* 主按钮（印章质感） */
+.btn {
+  appearance: none;
+  border: 2px solid var(--cinnabar);
+  background: transparent;
+  color: var(--cinnabar-deep);
+  font-family: var(--font-kai);
+  font-size: var(--text-base);
+  letter-spacing: 0.2em;
+  padding: 8px 22px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn:hover {
+  background: rgba(160, 58, 46, 0.08);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+.btn-ghost:hover {
+  background: rgba(47, 42, 36, 0.05);
+}
+
+/* 表单 */
+.field {
+  margin-bottom: var(--space-3);
+}
+.field label {
+  display: block;
+  font-family: var(--font-kai);
+  font-size: var(--text-base);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.field input,
+.field select {
+  font-family: var(--font-song);
+  font-size: var(--text-base);
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  min-width: 220px;
+}
+.field input:focus,
+.field select:focus {
+  outline: 1px solid var(--cinnabar);
+  border-color: var(--cinnabar);
+}
+
+/* 细线分隔 */
+.hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: var(--space-3) 0;
+}
+
+/* 提示条 */
+.note {
+  font-family: var(--font-kai);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.9;
+}
+
+.muted {
+  color: var(--ink-faint);
+}
+
+/* 加载占位 */
+.loading {
+  color: var(--ink-soft);
+  font-family: var(--font-kai);
+  letter-spacing: 0.2em;
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .card {
+    padding: var(--space-2);
+  }
+}
