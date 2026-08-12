@@ -35,7 +35,7 @@ export async function handleCron(env: Env): Promise<void> {
 
   const subject = `${dateKey} 黄历早报 · ${dayData.lunar.dayInGanZhi}日`;
   try {
-    await sendEmail(env, { subject, html: guide.html });
+    await sendEmail(env, { subject, html: guide.html, text: guide.text });
     await env.ZJ_KV.put('email:lastDate', dateKey);
     await env.ZJ_KV.delete('email:lastFail');
   } catch (e) {

@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@zeji/shared": "file:../shared"
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260812.1",
     "typescript": "^7.0.2",
+    "vitest": "^4.1.10",
     "wrangler": "^4.121.0"
   }
 }
