@@ -51,11 +51,11 @@ export default function AboutPage() {
       <section className="card">
         <p className="note" style={{ margin: 0 }}>
           本网站所有黄历内容均依据中国古籍与传统通书体系，计算由开源库
-          <b> lunar-typescript</b>（MIT，作者 6tail）与本站自有模块完成，不重复造轮子；
+          <b> lunar-typescript</b>（MIT，作者 6tail）与本站自有模块完成；
           全站不包含任何西方占星、西方数字命理内容。
         </p>
         <div style={{ overflowX: 'auto', marginTop: 16 }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
             <thead>
               <tr style={{ borderBottom: '3px double var(--ink)', fontFamily: 'var(--font-kai)' }}>
                 <th style={{ textAlign: 'left', padding: '6px 10px', letterSpacing: '0.1em' }}>数据</th>

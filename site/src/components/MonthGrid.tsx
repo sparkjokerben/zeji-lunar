@@ -51,16 +51,16 @@ export default function MonthGrid({ y, m, dataByDay, onPick }: Props) {
                 gap: 2,
               }}
             >
-              <span style={{ fontFamily: 'var(--font-latin)', fontSize: 16, color: 'var(--ink)', fontWeight: isToday ? 700 : 400 }}>
+              <span style={{ fontFamily: 'var(--font-latin)', fontSize: 17, color: 'var(--ink)', fontWeight: isToday ? 700 : 400 }}>
                 {d}
               </span>
-              <span style={{ fontFamily: 'var(--font-kai)', fontSize: 12, color: 'var(--ink-soft)', lineHeight: 1.4 }}>
+              <span style={{ fontFamily: 'var(--font-kai)', fontSize: 13, color: 'var(--ink-soft)', lineHeight: 1.4 }}>
                 {data
                   ? `${data.lunar.dayInChinese}${data.jieQi ? `·${data.jieQi}` : ''}`
                   : ''}
               </span>
               {data && (
-                <span style={{ fontSize: 10, color: 'var(--ink-faint)' }}>
+                <span style={{ fontSize: 11, color: 'var(--ink-faint)' }}>
                   {data.lunar.dayInGanZhi}
                 </span>
               )}

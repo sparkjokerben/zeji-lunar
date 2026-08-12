@@ -8,7 +8,7 @@ export default function HourLuckTable({ dayData }: { dayData: DayData }) {
         十二时辰
       </h2>
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
           <thead>
             <tr style={{ borderBottom: '3px double var(--ink)', fontFamily: 'var(--font-kai)' }}>
               <th style={{ padding: '6px 8px', textAlign: 'left', letterSpacing: '0.15em' }}>时辰</th>
@@ -35,8 +35,8 @@ export default function HourLuckTable({ dayData }: { dayData: DayData }) {
                     </span>
                     {isJi && <span style={{ color: 'var(--cinnabar)', marginLeft: 4 }}>吉</span>}
                   </td>
-                  <td style={{ padding: '6px 8px', color: 'var(--cinnabar-deep)', fontSize: 13 }}>{h.yi.join('、')}</td>
-                  <td style={{ padding: '6px 8px', color: 'var(--ink-soft)', fontSize: 13 }}>{h.ji.join('、')}</td>
+                  <td style={{ padding: '6px 8px', color: 'var(--cinnabar-deep)', fontSize: 14 }}>{h.yi.join('、')}</td>
+                  <td style={{ padding: '6px 8px', color: 'var(--ink-soft)', fontSize: 14 }}>{h.ji.join('、')}</td>
                 </tr>
               );
             })}

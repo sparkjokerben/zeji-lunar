@@ -7,6 +7,8 @@
 export interface Env {
   /** 设置存储（KV 命名空间 ZJ_KV，与 Pages Functions 共用同一 namespace） */
   ZJ_KV: KVNamespace;
+  /** 手动发信鉴权 token（与站点 Pages AUTH_TOKEN、前端 VITE_AUTH_TOKEN 三处值一致） */
+  AUTH_TOKEN: string;
   /** SMTP 服务器（如 smtp.qq.com / smtp.163.com / 企业邮箱），仅支持 465 隐式 TLS */
   SMTP_HOST: string;
   SMTP_PORT: string;

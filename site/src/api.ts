@@ -10,6 +10,24 @@ export interface SyncResult {
   message: string;
 }
 
+/** 手动发送今日早报测试邮件（同源 Pages Function → cron Worker 代理） */
+export async function sendTestEmail(): Promise<SyncResult> {
+  if (!AUTH_TOKEN) {
+    return { ok: false, message: '未配置云端同步（VITE_AUTH_TOKEN），仅本机保存' };
+  }
+  try {
+    const res = await fetch('/api/email', {
+      method: 'POST',
+      headers: { 'X-Auth-Token': AUTH_TOKEN },
+    });
+    if (res.ok) return { ok: true, message: '测试邮件已发送，请查收' };
+    const data = (await res.json().catch(() => null)) as { error?: string } | null;
+    return { ok: false, message: `发送失败（${res.status}）${data?.error ?? ''}` };
+  } catch (e) {
+    return { ok: false, message: `发送失败：${String(e)}` };
+  }
+}
+
 export async function syncSettings(profile: Profile): Promise<SyncResult> {
   if (!AUTH_TOKEN) {
     return { ok: false, message: '未配置云端同步（VITE_AUTH_TOKEN），仅本机保存' };

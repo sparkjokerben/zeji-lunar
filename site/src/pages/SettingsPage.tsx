@@ -1,6 +1,6 @@
 /** 设置页：生辰 → 个性化预览（生肖/四柱/日主/强弱/喜用/幸运色数）+ 本地保存 + 云端同步 */
 import { useMemo, useState } from 'react';
-import { apiAvailable, syncSettings, type SyncResult } from '../api';
+import { apiAvailable, sendTestEmail, syncSettings, type SyncResult } from '../api';
 import { useProfileStore } from '../store/profileStore';
 import { useShared } from '../hooks/useShared';
 
@@ -13,6 +13,8 @@ export default function SettingsPage() {
   const [hour, setHour] = useState<number | null>(birthHour);
   const [status, setStatus] = useState<SyncResult | null>(null);
   const [saving, setSaving] = useState(false);
+  const [mailStatus, setMailStatus] = useState<SyncResult | null>(null);
+  const [sendingMail, setSendingMail] = useState(false);
 
   const profile = date ? { birthDate: date, birthHour: hour } : null;
 
@@ -33,6 +35,13 @@ export default function SettingsPage() {
     const r = await syncSettings(profile);
     setStatus(r);
     setSaving(false);
+  };
+
+  const sendTest = async () => {
+    setSendingMail(true);
+    const r = await sendTestEmail();
+    setMailStatus(r);
+    setSendingMail(false);
   };
 
   return (
@@ -132,6 +141,21 @@ export default function SettingsPage() {
           <p className="note">{personal.summary}</p>
         </section>
       )}
+
+      <section className="card" style={{ marginTop: 24 }}>
+        <h2 style={{ fontSize: 16, letterSpacing: '0.2em', marginBottom: 12 }}>测试邮件</h2>
+        <p className="note" style={{ marginBottom: 12 }}>
+          立即把今日早报发到收件邮箱（内容与每日 07:17 自动发送一致；需先同步云端并完成 SMTP 配置）。
+        </p>
+        <button type="button" className="btn" onClick={sendTest} disabled={!apiAvailable || sendingMail}>
+          {sendingMail ? '发送中…' : '发送今日早报测试邮件'}
+        </button>
+        {mailStatus && (
+          <p className="note" style={{ marginTop: 12, color: mailStatus.ok ? 'var(--cinnabar-deep)' : 'var(--cinnabar)' }}>
+            {mailStatus.message}
+          </p>
+        )}
+      </section>
 
       <section className="card" style={{ marginTop: 24 }}>
         <h2 style={{ fontSize: 16, letterSpacing: '0.2em', marginBottom: 12 }}>说明</h2>

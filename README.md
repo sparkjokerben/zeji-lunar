@@ -64,11 +64,12 @@ cd site && npx wrangler pages dev             # http://localhost:8788 含 API
    cd worker && npm run deploy               # cron 随部署注册
    ```
 5. **SMTP 发件**：任选一个支持 465 隐式 TLS 的邮箱服务商（QQ/163/企业邮箱等），在邮箱设置里生成**授权码**（QQ/163 需开启 SMTP 服务并获取授权码，非登录密码）。注意：Cloudflare Workers 出站 TCP 仅禁止 25 端口，465 可用；若服务商拒绝来自数据中心 IP 的登录，需在服务商侧放行或换一家。
-6. **Secrets**：
-   - 站点（设置同步鉴权）：`npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar`（任意长随机串）
-   - Worker（邮件）：
+6. **Secrets**（`AUTH_TOKEN` 三处值必须一致：GitHub `VITE_AUTH_TOKEN`、Pages `AUTH_TOKEN`、Worker `AUTH_TOKEN`）：
+   - 站点（设置同步 + 手动测试邮件鉴权）：`npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar`
+   - Worker（手动发信鉴权 + 邮件）：
      ```bash
      cd worker
+     npx wrangler secret put AUTH_TOKEN    # 与上述同一值
      npx wrangler secret put SMTP_HOST     # 如 smtp.qq.com
      npx wrangler secret put SMTP_PORT     # 465
      npx wrangler secret put SMTP_USER     # SMTP 账号（邮箱地址）
@@ -82,7 +83,7 @@ cd site && npx wrangler pages dev             # http://localhost:8788 含 API
    ```
    重新 `npm run build` 并 `cd site && npx wrangler pages deploy --branch=main`。
 
-**上线自检**：站点 /api/health 不可见（health 在 worker）→ 设置页保存并同步成功（同源，无 CORS）→ 刷新后回读一致 → 手动触发 cron 收到邮件 → 次日 07:17 自动收到早报。
+**上线自检**：设置页保存并同步成功（同源，无 CORS）→ 刷新后回读一致 → 设置页「发送今日早报测试邮件」收到邮件 → 次日 07:17 自动收到早报。
 
 ## 时间换算
 

@@ -10,3 +10,7 @@ id = "05d8752a73e1406b8a3aa2312d0e82cf"
 
 # 敏感值（AUTH_TOKEN）用：
 # npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar
+
+[vars]
+# 手动发信代理目标（cron Worker 的 workers.dev 域名，账户子域变更时需同步更新）
+EMAIL_WORKER_URL = "https://zeji-lunar-worker.spark-jokerben.workers.dev"
