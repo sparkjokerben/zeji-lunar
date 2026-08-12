@@ -1,0 +1,12 @@
+# Pages 项目配置：静态站点 + functions/（同源 API，无需 CORS）
+name = "zeji-site"
+compatibility_date = "2026-08-01"
+pages_build_output_dir = "dist"
+
+# KV：与 cron Worker 共用同一命名空间（上线前把真实 id 写入此处与 worker/wrangler.toml）
+[[kv_namespaces]]
+binding = "ZJ_KV"
+id = "05d8752a73e1406b8a3aa2312d0e82cf"
+
+# 敏感值（AUTH_TOKEN）用：
+# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-site

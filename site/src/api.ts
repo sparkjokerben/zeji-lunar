@@ -1,10 +1,9 @@
-/** Worker API 客户端（设置同步）；未配置 VITE_WORKER_URL 时返回 null 表示不可用 */
+/** 设置同步：同源 Pages Function /api/settings（无 CORS）；未配置 VITE_AUTH_TOKEN 时不可用 */
 import type { Profile } from '@zeji/shared';
 
-const WORKER_URL = import.meta.env.VITE_WORKER_URL;
 const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
 
-export const apiAvailable = Boolean(WORKER_URL && AUTH_TOKEN);
+export const apiAvailable = Boolean(AUTH_TOKEN);
 
 export interface SyncResult {
   ok: boolean;
@@ -12,11 +11,11 @@ export interface SyncResult {
 }
 
 export async function syncSettings(profile: Profile): Promise<SyncResult> {
-  if (!WORKER_URL || !AUTH_TOKEN) {
-    return { ok: false, message: '未配置云端同步（VITE_WORKER_URL / VITE_AUTH_TOKEN）' };
+  if (!AUTH_TOKEN) {
+    return { ok: false, message: '未配置云端同步（VITE_AUTH_TOKEN），仅本机保存' };
   }
   try {
-    const res = await fetch(`${WORKER_URL}/api/settings`, {
+    const res = await fetch('/api/settings', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -29,17 +28,5 @@ export async function syncSettings(profile: Profile): Promise<SyncResult> {
     return { ok: false, message: `同步失败（${res.status}）${data?.error ?? ''}` };
   } catch (e) {
     return { ok: false, message: `同步失败：${String(e)}` };
-  }
-}
-
-export async function fetchSettings(): Promise<Profile | null> {
-  if (!WORKER_URL) return null;
-  try {
-    const res = await fetch(`${WORKER_URL}/api/settings`);
-    if (!res.ok) return null;
-    const data = (await res.json()) as { profile?: Profile | null };
-    return data.profile ?? null;
-  } catch {
-    return null;
   }
 }

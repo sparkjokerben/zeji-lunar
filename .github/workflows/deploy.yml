@@ -1,4 +1,4 @@
-# 每次 push 到 main：自动构建并部署 Pages + Worker（纯 CLI，无需面板 Git 集成）
+# 每次 push 到 main：自动构建并部署 Pages（含 functions）+ Worker（纯 CLI，无需面板 Git 集成）
 name: Deploy
 on:
   push:
@@ -20,15 +20,16 @@ jobs:
       - name: Build site
         run: npm run build -w site
         env:
-          VITE_WORKER_URL: ${{ secrets.VITE_WORKER_URL }}
           VITE_AUTH_TOKEN: ${{ secrets.VITE_AUTH_TOKEN }}
 
+      # site/wrangler.toml 含 pages_build_output_dir + KV 绑定，deploy 会连同 functions/ 一起部署
       - name: Deploy Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy site/dist --project-name=zeji-site --branch=main
+          workingDirectory: site
+          command: pages deploy --branch=main
 
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3

@@ -13,7 +13,7 @@
     "build": "npm run build --workspace=site",
     "test": "npm run test --workspace=shared",
     "typecheck": "npm run typecheck --workspace=shared && npm run typecheck --workspace=site && npm run typecheck --workspace=worker",
-    "deploy:site": "npm run build --workspace=site && npx wrangler pages deploy site/dist",
+    "deploy:site": "npm run build --workspace=site && cd site && npx wrangler pages deploy --branch=main",
     "deploy:worker": "npm run deploy --workspace=worker"
   },
   "engines": {

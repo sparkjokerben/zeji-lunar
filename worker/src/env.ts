@@ -1,13 +1,12 @@
 /**
  * Worker 环境变量与绑定。
- * 敏感值（AUTH_TOKEN / SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM / TO_EMAIL）
- * 通过 `npx wrangler secret put <名字>` 注入；SITE_ORIGIN 可在 wrangler.toml [vars] 配置。
+ * 敏感值（SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM / TO_EMAIL）
+ * 通过 `npx wrangler secret put <名字>` 注入。
+ * 注：设置同步 API 已迁至站点 Pages Functions（同源），AUTH_TOKEN 属 Pages 侧 secret。
  */
 export interface Env {
-  /** 设置存储（KV 命名空间 ZJ_KV） */
+  /** 设置存储（KV 命名空间 ZJ_KV，与 Pages Functions 共用同一 namespace） */
   ZJ_KV: KVNamespace;
-  /** 站点同步设置用的弱鉴权 token（与前端 VITE_AUTH_TOKEN 一致） */
-  AUTH_TOKEN: string;
   /** SMTP 服务器（如 smtp.qq.com / smtp.163.com / 企业邮箱），仅支持 465 隐式 TLS */
   SMTP_HOST: string;
   SMTP_PORT: string;
@@ -19,6 +18,4 @@ export interface Env {
   SMTP_FROM: string;
   /** 收件邮箱 */
   TO_EMAIL: string;
-  /** CORS 允许来源；缺省 *（仅本地调试） */
-  SITE_ORIGIN?: string;
 }

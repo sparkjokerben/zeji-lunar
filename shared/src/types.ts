@@ -26,6 +26,9 @@ export interface Profile {
   birthHour: number | null;
 }
 
+/** KV 中生辰设置的键（Worker cron 与 Pages Functions 共用同一存储，键名必须一致） */
+export const SETTINGS_KEY = 'settings:v1';
+
 /** 十二时辰一行 */
 export interface HourData {
   index: number;

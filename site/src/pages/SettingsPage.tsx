@@ -79,7 +79,7 @@ export default function SettingsPage() {
 
         {!apiAvailable && (
           <p className="note" style={{ marginTop: 12 }}>
-            云端同步未配置（需 VITE_WORKER_URL / VITE_AUTH_TOKEN 环境变量），仅本机保存。
+            云端同步未配置（需 VITE_AUTH_TOKEN 环境变量），仅本机保存。
           </p>
         )}
         {status && (

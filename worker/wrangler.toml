@@ -6,14 +6,13 @@ compatibility_date = "2026-08-01"
 # 上线前必须替换为真实 id：npx wrangler kv namespace create ZJ_KV
 [[kv_namespaces]]
 binding = "ZJ_KV"
-id = "00000000000000000000000000000000"
+id = "05d8752a73e1406b8a3aa2312d0e82cf"
 
 # 每天 23:17 UTC = 北京时间次日 07:17 发送黄历早报
 [triggers]
 crons = ["17 23 * * *"]
 
-# 环境变量（非敏感）：
-# [vars]
-# SITE_ORIGIN = "https://你的域名"   # CORS 允许来源
-# 敏感值（AUTH_TOKEN / RESEND_API_KEY / TO_EMAIL / SEND_DOMAIN）用：
+# 敏感值（SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM / TO_EMAIL）用：
 # npx wrangler secret put <名字>
+# 注：设置同步 API 在站点 Pages Functions（site/functions），AUTH_TOKEN 用：
+# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-site

@@ -1,0 +1,2 @@
+# 复制为 .dev.vars（gitignore 已排除）用于本地 wrangler pages dev（仅 AUTH_TOKEN 需要）
+AUTH_TOKEN=change-me
