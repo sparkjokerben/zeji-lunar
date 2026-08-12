@@ -1,4 +1,4 @@
-name = "zeji-worker"
+name = "zeji-lunar-worker"
 main = "src/index.ts"
 compatibility_date = "2026-08-01"
 
@@ -15,4 +15,4 @@ crons = ["17 23 * * *"]
 # 敏感值（SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM / TO_EMAIL）用：
 # npx wrangler secret put <名字>
 # 注：设置同步 API 在站点 Pages Functions（site/functions），AUTH_TOKEN 用：
-# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-site
+# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar

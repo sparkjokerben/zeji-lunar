@@ -1,5 +1,5 @@
 # Pages 项目配置：静态站点 + functions/（同源 API，无需 CORS）
-name = "zeji-site"
+name = "zeji-lunar"
 compatibility_date = "2026-08-01"
 pages_build_output_dir = "dist"
 
@@ -9,4 +9,4 @@ binding = "ZJ_KV"
 id = "05d8752a73e1406b8a3aa2312d0e82cf"
 
 # 敏感值（AUTH_TOKEN）用：
-# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-site
+# npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar

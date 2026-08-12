@@ -54,7 +54,7 @@ cd site && npx wrangler pages dev             # http://localhost:8788 含 API
    把返回的 `id` 分别写入 `site/wrangler.toml` 与 `worker/wrangler.toml` 的 `[[kv_namespaces]]`。
 2. **站点**：
    ```bash
-   npx wrangler pages project create zeji-site --production-branch main
+   npx wrangler pages project create zeji-lunar --production-branch main
    npm run build
    cd site && npx wrangler pages deploy --branch=main   # 含 functions/（/api/settings）
    ```
@@ -65,7 +65,7 @@ cd site && npx wrangler pages dev             # http://localhost:8788 含 API
    ```
 5. **SMTP 发件**：任选一个支持 465 隐式 TLS 的邮箱服务商（QQ/163/企业邮箱等），在邮箱设置里生成**授权码**（QQ/163 需开启 SMTP 服务并获取授权码，非登录密码）。注意：Cloudflare Workers 出站 TCP 仅禁止 25 端口，465 可用；若服务商拒绝来自数据中心 IP 的登录，需在服务商侧放行或换一家。
 6. **Secrets**：
-   - 站点（设置同步鉴权）：`npx wrangler pages secret put AUTH_TOKEN --project-name zeji-site`（任意长随机串）
+   - 站点（设置同步鉴权）：`npx wrangler pages secret put AUTH_TOKEN --project-name zeji-lunar`（任意长随机串）
    - Worker（邮件）：
      ```bash
      cd worker
