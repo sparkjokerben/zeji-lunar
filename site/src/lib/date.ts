@@ -19,6 +19,12 @@ export function isSameDay(a: Ymd, b: Ymd): boolean {
   return a.y === b.y && a.m === b.m && a.d === b.d;
 }
 
+/** 加/减天数（跨月、跨年自动进位） */
+export function addDays(t: Ymd, delta: number): Ymd {
+  const d = new Date(t.y, t.m - 1, t.d + delta);
+  return { y: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate() };
+}
+
 export function daysInMonth(y: number, m: number): number {
   return new Date(y, m, 0).getDate();
 }

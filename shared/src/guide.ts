@@ -1,13 +1,11 @@
 /**
  * 今日指南生成器：确定性模板（无 LLM），站点与邮件共用同一算法。
- * 规则编号固定：R1 开场 → R2 宜忌 → R3 六冲避讳 → R4 吉时方位 → R5 幸运 → R6 彭祖 → R7 节气收尾。
+ * 规则编号固定：R1 开场 → R2 建除/九星/星宿/纳音 → R3 宜忌 → R4 冲煞 → R5 六冲避讳
+ * → R6 吉时方位 → R7 幸运 → R8 彭祖 → R9 节气收尾。
  */
 import { JIEQI_TEXT } from './elements';
 import type { ChongStatus, DayData, GuideResult, PersonalResult } from './types';
 import { getChongStatus } from './personal';
-
-/** 彭祖百忌中具有强警示意味的词条，命中才单独成句 */
-const PENGZU_STRONG = ['不开仓', '不针灸', '不远行', '不渡水', '不占病', '不迁徙', '不栽种'];
 
 function pickChong(dayData: DayData, personal: PersonalResult | null): ChongStatus | null {
   if (!personal) return null;
@@ -22,9 +20,12 @@ export function generateGuide(dayData: DayData, personal: PersonalResult | null)
   if (dayData.jieQi) open += `时值${dayData.jieQi}。`;
   s.push(open);
 
-  // R2 宜忌（各取前 3）
-  const yi = dayData.yi.slice(0, 3);
-  const ji = dayData.ji.slice(0, 3);
+  // R2 建除十二值星、九星、二十八宿、日纳音
+  s.push(`建除值${dayData.zhiXing}，九星${dayData.nineStar}，星宿${dayData.xiu}，日纳音${dayData.naYin}。`);
+
+  // R3 宜忌（各取前 5）
+  const yi = dayData.yi.slice(0, 5);
+  const ji = dayData.ji.slice(0, 5);
   if (yi.length && ji.length) {
     s.push(`宜${yi.join('、')}；忌${ji.join('、')}。`);
   } else if (yi.length) {
@@ -33,32 +34,35 @@ export function generateGuide(dayData: DayData, personal: PersonalResult | null)
     s.push(`忌${ji.join('、')}。`);
   }
 
-  // R3 生肖六冲避讳
+  // R4 冲煞（当日所冲生肖与煞方）
+  s.push(`冲煞：${dayData.chongDesc}。`);
+
+  // R5 生肖六冲避讳（个人）
   const chong = pickChong(dayData, personal);
   if (chong) s.push(chong.text);
 
-  // R4 吉时 + 喜神方位
-  const jiShi = dayData.jiShi.slice(0, 2);
+  // R6 吉时 + 喜神方位
+  const jiShi = dayData.jiShi.slice(0, 3);
   if (jiShi.length) {
     s.push(`吉时择${jiShi.join('、')}，喜神居${dayData.positions.xi}，利朝${dayData.positions.xi}问事。`);
   } else {
     s.push(`喜神居${dayData.positions.xi}，利朝${dayData.positions.xi}问事。`);
   }
 
-  // R5 幸运色/数字（河图五色、五行生成数）
+  // R7 幸运色/数字（河图五色、五行生成数）
   if (personal) {
     s.push(
       `今日幸运色${personal.luckyColor.name}，幸运数字${personal.luckyNumbers.join('、')}，随身点缀可助心气。`,
     );
   }
 
-  // R6 彭祖百忌（强警示词条）
+  // R8 彭祖百忌（干、支两条全列）
   const pz = [dayData.pengZu.gan, dayData.pengZu.zhi].filter(Boolean);
-  if (pz.length && pz.some((p) => PENGZU_STRONG.some((k) => p.includes(k)))) {
+  if (pz.length) {
     s.push(`彭祖百忌：${pz.join('，')}。`);
   }
 
-  // R7 节气起居收尾（当日交节优先，否则用当前所处节气）
+  // R9 节气起居收尾（当日交节优先，否则用当前所处节气）
   const seasonText = dayData.jieQi ? JIEQI_TEXT[dayData.jieQi] : (dayData.currentJieQi ? JIEQI_TEXT[dayData.currentJieQi] : undefined);
   if (seasonText) s.push(seasonText);
 
