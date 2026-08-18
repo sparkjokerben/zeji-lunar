@@ -8,7 +8,7 @@ export default function HourLuckTable({ dayData }: { dayData: DayData }) {
         十二时辰
       </h2>
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
+        <table className="resp-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
           <thead>
             <tr style={{ borderBottom: '3px double var(--ink)', fontFamily: 'var(--font-kai)' }}>
               <th style={{ padding: '6px 8px', textAlign: 'left', letterSpacing: '0.15em' }}>时辰</th>

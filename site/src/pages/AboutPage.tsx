@@ -55,7 +55,7 @@ export default function AboutPage() {
           全站不包含任何西方占星、西方数字命理内容。
         </p>
         <div style={{ overflowX: 'auto', marginTop: 16 }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
+          <table className="resp-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
             <thead>
               <tr style={{ borderBottom: '3px double var(--ink)', fontFamily: 'var(--font-kai)' }}>
                 <th style={{ textAlign: 'left', padding: '6px 10px', letterSpacing: '0.1em' }}>数据</th>

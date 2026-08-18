@@ -48,7 +48,7 @@ export default function TodayCard({ dayData }: { dayData: DayData }) {
 
       {/* 宜忌两栏（竖排） */}
       <div style={{ display: 'flex', gap: 40, marginTop: 20, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div style={{ display: 'flex', gap: 12, maxWidth: '100%' }}>
           <span
             className="vertical"
             style={{
@@ -61,7 +61,7 @@ export default function TodayCard({ dayData }: { dayData: DayData }) {
             宜
           </span>
           <ul
-            className="vertical"
+            className="vertical vertical-items"
             style={{
               listStyle: 'none',
               margin: 0,
@@ -69,34 +69,34 @@ export default function TodayCard({ dayData }: { dayData: DayData }) {
               fontFamily: 'var(--font-kai)',
               fontSize: 17,
               color: 'var(--cinnabar-deep)',
+              flex: 1,
+              minWidth: 0,
             }}
           >
             {dayData.yi.map((x) => (
-              <li key={x} style={{ marginBottom: 4 }}>
-                {x}
-              </li>
+              <li key={x}>{x}</li>
             ))}
           </ul>
         </div>
 
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div style={{ display: 'flex', gap: 12, maxWidth: '100%' }}>
           <span className="vertical" style={{ fontSize: 20, fontWeight: 600 }}>
             忌
           </span>
           <ul
-            className="vertical"
+            className="vertical vertical-items"
             style={{
               listStyle: 'none',
               margin: 0,
               padding: 0,
               fontFamily: 'var(--font-kai)',
               fontSize: 17,
+              flex: 1,
+              minWidth: 0,
             }}
           >
             {dayData.ji.map((x) => (
-              <li key={x} style={{ marginBottom: 4 }}>
-                {x}
-              </li>
+              <li key={x}>{x}</li>
             ))}
           </ul>
         </div>

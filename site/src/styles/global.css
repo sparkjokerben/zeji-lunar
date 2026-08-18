@@ -59,6 +59,31 @@ h3 {
   letter-spacing: 0.18em;
 }
 
+/* 竖排宜忌列表：连排成流（非每项一列），超高自动向左换列；
+   列高 220px + 紧凑列宽，配 flex min-width:0 与 overflow-x，任何宽度不溢出 */
+.vertical-items {
+  max-height: 220px;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+.vertical-items li {
+  display: inline-block;
+  margin: 0;
+}
+.vertical-items li::after {
+  content: '、';
+}
+.vertical-items li:last-child::after {
+  content: '';
+}
+
+/* 窄屏表格：给最小宽度，用横向滚动代替挤压变形 */
+@media (max-width: 640px) {
+  .resp-table {
+    min-width: 600px;
+  }
+}
+
 /* 朱砂/墨 标签 */
 .tag-cinnabar {
   color: var(--cinnabar);
